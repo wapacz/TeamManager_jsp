@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+import org.json.JSONException;
+
 /**
  * Servlet implementation class Proxy
  */
@@ -29,8 +32,21 @@ public class Proxy extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// request.getParameter("id");
+
 		PrintWriter out = response.getWriter();
-		out.println("Hello World from servlet!!!");
+		JSONObject json = new JSONObject();
+		String responseValue = "";
+		
+		try {
+			json.put("message", "everything is ok");
+			responseValue = json.toString();
+		}
+		catch(JSONException ex) {
+			responseValue = "ERROR with JSON";
+		}
+		finally {
+			out.println(responseValue);
+		}
 	}
 
 	/**
