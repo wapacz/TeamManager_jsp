@@ -40,6 +40,7 @@ public class Proxy extends HttpServlet {
 		try {
 			json.put("message", "everything is ok");
 			responseValue = json.toString();
+			responseValue = "{\"message\" : \"everything is ok\"}";
 		}
 		catch(JSONException ex) {
 			responseValue = "ERROR with JSON";
