@@ -2,6 +2,7 @@ package org.catcher.TaskManager.DAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.json.JSONException;
+
+import com.fourspaces.couchdb.Session;
 
 /**
  * Servlet implementation class Proxy
@@ -37,10 +40,22 @@ public class Proxy extends HttpServlet {
 		JSONObject json = new JSONObject();
 		String responseValue = "";
 		
-		try {
+		try {		
+			Session dbSession = new Session("localhost", 5984);
+			//String dbname = "sample_db";
+	        //dbSession.deleteDatabase(dbname);
+	        
+	        List<String> listofdb = dbSession.getDatabaseNames();
+	        for (String s : listofdb) {
+	        	json.put(s, "avaiable");
+	            //System.out.println("List of databases available: " + s);
+	        }
+			
+	        json.put("asdasd", "avaiable");
+
 			json.put("message", "everything is ok");
 			responseValue = json.toString();
-			responseValue = "{\"message\" : \"everything is ok\"}";
+			//responseValue = "{\"message\" : \"everything is ok\"}";
 		}
 		catch(JSONException ex) {
 			responseValue = "ERROR with JSON";
