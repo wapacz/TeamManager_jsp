@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-import org.json.JSONException;
+import net.sf.json.JSONObject;
 
 import com.fourspaces.couchdb.Session;
 
@@ -57,7 +56,7 @@ public class Proxy extends HttpServlet {
 			responseValue = json.toString();
 			//responseValue = "{\"message\" : \"everything is ok\"}";
 		}
-		catch(JSONException ex) {
+		catch(Exception ex) {
 			responseValue = "ERROR with JSON";
 		}
 		finally {
